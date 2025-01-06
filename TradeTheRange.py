@@ -42,17 +42,21 @@ st.title("Investment Strategy Calculator")
 
 # Input fields for capital, buy levels, and sell levels
 initial_capital = st.number_input("Initial Capital ($)", min_value=0.0, value=10000.0, step=100.0)
+
+# Initialize buy and sell prices as empty lists
 buy_prices = []
 sell_prices = []
 
 # Input fields for buy prices (3 levels)
+default_buy_prices = [140, 135, 130]
 for i in range(3):
-    buy_price = st.number_input(f"Buy Price Level {i+1} ($)", min_value=0.0, value=[140, 135, 130][i], step=1.0)
+    buy_price = st.number_input(f"Buy Price Level {i+1} ($)", min_value=0.0, value=float(default_buy_prices[i]), step=1.0)
     buy_prices.append(buy_price)
 
 # Input fields for sell prices (3 levels)
+default_sell_prices = [135, 140, 142]
 for i in range(3):
-    sell_price = st.number_input(f"Sell Price Level {i+1} ($)", min_value=0.0, value=[135, 140, 142][i], step=1.0)
+    sell_price = st.number_input(f"Sell Price Level {i+1} ($)", min_value=0.0, value=float(default_sell_prices[i]), step=1.0)
     sell_prices.append(sell_price)
 
 # Calculate button
