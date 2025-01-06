@@ -66,10 +66,22 @@ if st.button("Calculate"):
         initial_capital, buy_prices, sell_prices
     )
     
-    # Display the results
-    st.subheader("Results")
-    st.write(f"**Total Capital (after selling 80% and keeping 20%):** ${final_capital:.2f}")
-    st.write(f"**Total Profit (with 20% left in the market):** ${profit:.2f}")
-    st.write(f"**Profit Percentage (with 20% left in the market):** {profit_percentage:.2f}%")
-    st.write(f"**Breakeven Price for Remaining 20% to Break Even:** ${breakeven_price:.2f}")
-    st.write(f"**Maximum Profit Percentage (Full Range Buy Low at 130, Sell High at 142):** {max_profit:.2f}%")
+    # Display results in columns
+    st.subheader("Results Overview")
+    col1, col2, col3 = st.columns(3)
+    col1.metric("Total Capital", f"${final_capital:.2f}")
+    col2.metric("Total Profit", f"${profit:.2f}")
+    col3.metric("Profit Percentage", f"{profit_percentage:.2f}%")
+    
+    # Add breakeven and max profit in separate columns
+    col4, col5 = st.columns(2)
+    col4.metric("Breakeven Price", f"${breakeven_price:.2f}")
+    col5.metric("Maximum Profit %", f"{max_profit:.2f}%")
+    
+    # Display a summary table
+    st.subheader("Detailed Breakdown")
+    breakdown_data = {
+        "Category": ["Initial Capital", "Total Sold Value", "Remaining Investment", "Final Capital"],
+        "Value ($)": [initial_capital, final_capital - profit, initial_capital * 0.40, final_capital],
+    }
+    st.table(breakdown_data)
